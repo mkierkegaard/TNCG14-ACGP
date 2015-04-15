@@ -1,4 +1,5 @@
 /* -*- Mode: c; c-indentation-style: stroustrup; c-basic-offset: 4 -*- */
+#define _USE_MATH_DEFINES
 
 #include <GL/glut.h>
 #include <math.h>

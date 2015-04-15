@@ -3,8 +3,9 @@
 #include <GL/glut.h>
 
 GLdouble angle;
-GLfloat cube_color[4] = { 0.9, 0.5, 0.2, 1.0 };
-GLfloat cube_spec[4] = { 0.2, 0.2, 0.1, 1.0 };
+GLfloat sun_color[4] = { 0.9, 0.5, 0.2, 1.0 };
+GLfloat sun_spec[4] = { 0.2, 0.2, 0.1, 1.0 };
+const GLfloat center[] = { 0, 0, 0 };
 
 void init() {
     glEnable(GL_LIGHTING);
@@ -28,9 +29,14 @@ void display(void) {
     glRotatef(angle, 0.5, 1, 0.3);
 
     glShadeModel(GL_FLAT);
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cube_color);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, cube_spec);
-    glutSolidCube(1);
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, sun_color);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, sun_spec);
+    glutSolidSphere(0.1, 10, 10);
+	glLightfv(GL_LIGHT1, GL_POSITION, center);
+
+	glRotatef(angle, 1, 1, 1);
+	glTranslatef(0, 1, 0); 
+	glutSolidSphere(0.05, 10, 10);
 
     glutSwapBuffers();
 }
