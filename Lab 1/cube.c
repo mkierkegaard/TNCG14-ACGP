@@ -2,7 +2,7 @@
 
 #include <GL/glut.h>
 
-GLdouble angle, angle2;
+GLdouble angle, angle2, angle3;
 GLfloat sun_color[] = { 0.9, 0.0, 0.0, 1.0 };
 GLfloat sun_spec[] = { 0.5, 0.5, 0.5, 1.0 };
 const GLfloat center[] = { 0, 0, -3, 1 };
@@ -24,6 +24,7 @@ void init() {
     glClearColor(0, 0, 0, 0);
     angle = 0;
 	angle2 = 0;
+	angle3 = 0;
 	
 	glLightfv(GL_LIGHT0, GL_POSITION, center);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient0);
@@ -35,8 +36,10 @@ void init() {
 void anim() {
     angle += 0.08;
 	angle2 += 2.4;
+	angle3 += 0.48;
     if (angle>360) angle -= 360;
 	if (angle2>360) angle -= 360;
+	if (angle3>360) angle -= 360;
     glutPostRedisplay();
 }
 
@@ -78,13 +81,28 @@ void display(void) {
 	glVertex3f(0.0, 0.15, 0.0);
 	glVertex3f(0.0, -0.15, 0.0);
 	glEnd();
+	/*
+	glBegin(GL_LINE_LOOP);
+	double i;
+	int num_lines = 100;
+	for (i = 0; i < 360; i += 360 / num_lines){
+		glVertex3f(sin(i*3.14), 0.0, cos(i*3.14));
+	}
+
+	glEnd(GL_LINE_LOOP);*/
 	glEnable(GL_LIGHT0);
 	//LoadTexture("earth_texture.bmp", earthTexture);
 	//glBindTexture(GL_TEXTURE_2D, earthTexture);
 	glutSolidSphere(0.05, 20, 20);
 	//glDisable(GL_TEXTURE_2D);
-	glPopMatrix();
+//	glPopMatrix();
 	//glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(angle3, 0, 1, 0);
+	glTranslatef(0.3, 0, 0);
+
+	glutSolidSphere(0.02, 10, 10);
 
     glutSwapBuffers();
 }
