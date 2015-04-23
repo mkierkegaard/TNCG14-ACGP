@@ -1,6 +1,10 @@
 /* -*- Mode: c; c-indentation-style: stroustrup; c-basic-offset: 4 -*- */
+#define _USE_MATH_DEFINES
+#define M_ROTATE_XY     1
 
 #include <GL/glut.h>
+#include <math.h>
+#include <stdio.h>
 
 GLdouble angle, angle2, angle3;
 GLfloat sun_color[] = { 0.9, 0.0, 0.0, 1.0 };
@@ -11,6 +15,15 @@ GLfloat diffuse0[] = { 0.5, 0.5, 0.5, 1 };
 GLfloat specular0[] = { 0.9, 0.5, 0, 1 };
 GLfloat sun_emission[] = { 0.9, 0.3, 0.1, 0.1 };
 GLfloat earth_color[] = { 0.1, 0.6, 0.3, 1 };
+GLboolean showOrbit;
+
+int mouseState = 0;
+int xCenter = 0;
+int yCenter = 0;
+GLfloat xRot = 0;
+GLfloat yRot = 0;
+GLfloat xRotOld = 0;
+GLfloat yRotOld = 0;
 
 //earthTexture = LoadBitmap("earth_texture.jpg");
 GLuint earthTexture;
@@ -43,69 +56,92 @@ void anim() {
     glutPostRedisplay();
 }
 
+
+void drawLine()
+{
+	double angle = 2 * 3.14 / 200;
+	glColor3f(1.0, 1.0, 1.0);
+	glLineWidth(2.5);
+	//glMaterialfv(GL_FRONT, GL_EMISSION, ambient0);
+	glBegin(GL_LINE_LOOP);
+	double angle1 = 0.0;
+	glVertex3d( cos(0.0), 0.0,  sin(0.0));
+	int i;
+	for (i = 0; i < 200; ++i)
+	{
+		glVertex3d( cos(angle1), 0.0,  sin(angle1));
+		angle1 += angle;
+	}
+	glEnd();
+}
+
 void display(void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-	//glPushMatrix();
 
-	
-	
+	printf("\n%f and %f", xRot, yRot);
+
     glTranslatef(0, 0, -3);
+
+	glRotatef(xRot, 1, 0, 0);
+	glRotatef(yRot, 0, 1, 0);
 	glEnable(GL_COLOR_MATERIAL);
 
 	glPushMatrix();
+	glDisable(GL_LIGHT0);
+	if (showOrbit)
+		drawLine();
+	glEnable(GL_LIGHT0);
+
 	glRotatef(angle, 0, 1, 0);
     glShadeModel(GL_FLAT);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambient0);
+	
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, sun_color);
     glMaterialfv(GL_FRONT, GL_SPECULAR, sun_spec);
 	glMaterialfv(GL_FRONT, GL_EMISSION, sun_emission);
     glutSolidSphere(0.2, 100, 100);
+
+	
+
 	glPopMatrix();
+	
 	glDisable(GL_COLOR_MATERIAL);
 	
 	glEnable(GL_COLOR_MATERIAL);
 	glPushMatrix();
+
 	glRotatef(angle, 0, 1, 0);
 	glTranslatef(1, 0, 0);
+	glRotatef(-angle, 0, 1, 0);
+	glRotatef(10, 0, 0, 1);
+
 	glRotatef(angle2, 0, 1, 0);
-	glRotatef(10, 0, 1, 0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient0);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, earth_color);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, earth_color);
 	glMaterialfv(GL_FRONT, GL_EMISSION, ambient0);
 	glEnable(GL_TEXTURE_2D);
-	//glMatrixMode(GL_TEXTURE);
+	
 	glDisable(GL_LIGHT0);
+
 	glBegin(GL_LINES);
 	glVertex3f(0.0, 0.15, 0.0);
 	glVertex3f(0.0, -0.15, 0.0);
 	glEnd();
-	/*
-	glBegin(GL_LINE_LOOP);
-	double i;
-	int num_lines = 100;
-	for (i = 0; i < 360; i += 360 / num_lines){
-		glVertex3f(sin(i*3.14), 0.0, cos(i*3.14));
-	}
-
-	glEnd(GL_LINE_LOOP);*/
 	glEnable(GL_LIGHT0);
-	//LoadTexture("earth_texture.bmp", earthTexture);
-	//glBindTexture(GL_TEXTURE_2D, earthTexture);
 	glutSolidSphere(0.05, 20, 20);
-	//glDisable(GL_TEXTURE_2D);
-//	glPopMatrix();
-	//glPopMatrix();
-
+	
 	glPushMatrix();
 	glRotatef(angle3, 0, 1, 0);
 	glTranslatef(0.3, 0, 0);
 
 	glutSolidSphere(0.02, 10, 10);
+	
+
 
     glutSwapBuffers();
 }
+
 
 void reshape(int w, int h) {
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
@@ -121,8 +157,35 @@ void keyboard(unsigned char key, int x, int y) {
      case 3:             /* Ctrl-C */
      case 27:            /* ESC */
          exit(0);
+	 case 'o': showOrbit = !showOrbit;
+		 break;
      }
 }
+
+
+void mouse(int button, int state, int x, int y) {
+	xCenter = x;
+	yCenter = y;
+	if (state == GLUT_DOWN) {
+		if (button == GLUT_LEFT_BUTTON) {
+			mouseState = M_ROTATE_XY;
+			xRotOld = xRot;
+			yRotOld = yRot;
+		}
+	}
+	else {
+		mouseState = 0;
+	}
+}
+
+void motion(int x, int y) {
+	
+	if (mouseState == M_ROTATE_XY) {
+		xRot = xRotOld + (float)(y - yCenter) / 4.0;
+		yRot = yRotOld + (float)(x - xCenter) / 4.0;
+	}
+}
+
 
 int main(int argc, char **argv) {
     glutInit(&argc, argv);
@@ -133,7 +196,9 @@ int main(int argc, char **argv) {
     init();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
+	glutMotionFunc(motion);
     glutIdleFunc(anim);
-    glutReshapeFunc(reshape);
+    glutReshapeFunc(reshape);	
     glutMainLoop();
 }

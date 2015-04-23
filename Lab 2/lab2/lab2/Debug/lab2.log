@@ -1,0 +1,42 @@
+﻿Build started 2015-04-21 15:26:50.
+     1>Project "C:\Users\Martin\Documents\Liu\TNCG14\Labs\Lab 2\lab2\lab2\lab2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\._geo_sphere.c ..\..\._png_reader.c ..\..\png_reader.c
+         png_reader.c
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\png_reader.h(5): fatal error C1083: Cannot open include file: 'png.h': No such file or directory
+         ._png_reader.c
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c : warning C4821: Unable to determine Unicode encoding type, please save the file with signature (BOM)
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2018: unknown character '0x5'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2018: unknown character '0x16'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2018: unknown character '0x7'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2018: unknown character '0x2'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2061: syntax error : identifier 'OS'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2059: syntax error : ';'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2143: syntax error : missing '{' before 'constant'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2059: syntax error : 'constant'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2018: unknown character '0x1'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2018: unknown character '0x15'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2143: syntax error : missing '{' before '.'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2059: syntax error : '.'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._png_reader.c(1): error C2059: syntax error : '|'
+         ._geo_sphere.c
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c : warning C4821: Unable to determine Unicode encoding type, please save the file with signature (BOM)
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2018: unknown character '0x5'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2018: unknown character '0x16'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2018: unknown character '0x7'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2018: unknown character '0x2'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2061: syntax error : identifier 'OS'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2059: syntax error : ';'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2143: syntax error : missing '{' before 'constant'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2059: syntax error : 'constant'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2018: unknown character '0x1'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2018: unknown character '0x15'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2143: syntax error : missing '{' before '.'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2059: syntax error : '.'
+     1>c:\users\martin\documents\liu\tncg14\labs\lab 2\._geo_sphere.c(1): error C2059: syntax error : '|'
+         Generating Code...
+     1>Done Building Project "C:\Users\Martin\Documents\Liu\TNCG14\Labs\Lab 2\lab2\lab2\lab2.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.45
